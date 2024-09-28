@@ -20,3 +20,13 @@ export async function POST(request: Request) {
   }
   return Response.json({ message: "OK" }, { status: 201 });
 }
+
+export async function GET() {
+  let allWarehouse;
+  try {
+    allWarehouse = await db.select().from(warehouses);
+  } catch (error) {
+    return Response.json({ message: error }, { status: 500 });
+  }
+  return Response.json({ message: "OK" }, { status: 200 });
+}
