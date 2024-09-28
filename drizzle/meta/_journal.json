@@ -15,6 +15,20 @@
       "when": 1727520000194,
       "tag": "0001_unknown_leo",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1727531895574,
+      "tag": "0002_burly_texas_twister",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1727533204290,
+      "tag": "0003_stale_zombie",
+      "breakpoints": true
     }
   ]
 }
