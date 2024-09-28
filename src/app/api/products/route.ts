@@ -1,6 +1,7 @@
 import { db } from "@/lib/db/db";
 import { products } from "@/lib/db/schema";
 import { productSchema } from "@/lib/validators/productSchema";
+import { desc } from "drizzle-orm";
 import { unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 
@@ -33,4 +34,17 @@ export async function POST(request: Request) {
     return Response.json({ message: error }, { status: 500 });
   }
   return Response.json({ message: "OK" }, { status: 201 });
+}
+
+export async function GET() {
+  let returnedProducts;
+  try {
+    returnedProducts = await db
+      .select()
+      .from(products)
+      .orderBy(desc(products.id));
+  } catch (error) {
+    return Response.json({ message: error }, { status: 500 });
+  }
+  return Response.json(returnedProducts, { status: 200 });
 }
