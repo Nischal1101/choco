@@ -7,6 +7,10 @@ import {
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
+const myTimeStamp = {
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+};
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -65,4 +69,19 @@ export const deliveryPersons = pgTable("delivery_persons", {
   }),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const inventories = pgTable("inventories", {
+  id: serial("id").primaryKey(),
+  orderId: integer("order_id").references(() => orders.id, {
+    onDelete: "set null",
+  }),
+  warehouseId: integer("warehouse_id").references(() => warehouses.id, {
+    onDelete: "cascade",
+  }),
+  productId: integer("product_id").references(() => products.id, {
+    onDelete: "cascade",
+  }),
+  sku: varchar("sku", { length: 8 }).unique().notNull(),
+  ...myTimeStamp,
 });
