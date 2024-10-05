@@ -13,7 +13,7 @@ import { useNewProduct } from "@/store/product/product-store";
 import { useToast } from "@/hooks/use-toast";
 
 const ProductSheet = () => {
-  const {toast} = useToast();
+  const { toast } = useToast();
   const { isOpen, onClose } = useNewProduct();
 
   const queryClient = useQueryClient();
@@ -23,8 +23,8 @@ const ProductSheet = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
       toast({
-        title:'Product Created Successfully'
-      })
+        title: "Product Created Successfully",
+      });
       onClose();
     },
   });

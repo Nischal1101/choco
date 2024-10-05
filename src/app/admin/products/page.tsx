@@ -12,11 +12,7 @@ import ProductSheet from "./_components/product-sheet";
 import { useNewProduct } from "@/store/product/product-store";
 
 const ProductsPage = () => {
-  const {
-    data: products,
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: getAllProducts,
   });
@@ -30,8 +26,14 @@ const ProductsPage = () => {
         </Button>
         <ProductSheet />
       </div>
+      {isLoading ? (
+        <div className="flex justify-center">
 
-      <DataTable columns={columns} data={products || []} />
+          <Loader2 className="size-10 animate-spin" />
+        </div>
+      ) : (
+        <DataTable columns={columns} data={products || []} />
+      )}
     </>
   );
 };
