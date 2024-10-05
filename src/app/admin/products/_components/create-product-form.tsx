@@ -14,15 +14,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Loader2 } from "lucide-react";
 export type FormValues = z.infer<typeof productSchema>;
 
 const CreateProductForm = ({
   onSubmit,
+  isPending,
 }: {
   onSubmit: (formvalues: FormValues) => void;
+  isPending: boolean;
 }) => {
   const handleFormSubmit = (values: FormValues) => {
-    onSubmit(values); 
+    onSubmit(values);
   };
 
   const form = useForm<z.infer<typeof productSchema>>({
@@ -103,8 +106,8 @@ const CreateProductForm = ({
             )}
           />
 
-          <Button type="submit" className="w-full">
-            Create
+          <Button type="submit" className="w-full" disabled={isPending}>
+            {isPending ? <Loader2 className="size-4 animate-spin" /> : "Create"}
           </Button>
         </form>
       </Form>
