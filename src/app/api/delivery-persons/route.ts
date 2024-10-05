@@ -1,6 +1,6 @@
 import { db } from "@/lib/db/db";
 import { deliveryPersons, warehouses } from "@/lib/db/schema";
-import { deliveryPersonSchema } from "@/lib/validators/delivery-personSchema";
+import { deliveryPersonSchema } from "@/lib/validators/deliveryPersonSchema";
 import { desc, eq } from "drizzle-orm";
 
 export async function POST(request: Request) {
@@ -37,7 +37,7 @@ export async function GET() {
       .from(deliveryPersons)
       .leftJoin(warehouses, eq(deliveryPersons.warehouseId, warehouses.id))
       .orderBy(desc(deliveryPersons.id));
-    return Response.json({ message: allDeliveryPersons }, { status: 201 });
+    return Response.json(allDeliveryPersons, { status: 201 });
   } catch (error) {
     return Response.json(
       { message: "failed to get all delivery persons" },

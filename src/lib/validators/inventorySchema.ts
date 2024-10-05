@@ -1,5 +1,5 @@
 import { z } from "zod";
-export const inventoriesSchema = z.object({
+export const inventorySchema = z.object({
   sku: z
     .string({ message: "sku should be a string" })
     .length(8, { message: "sku length should be exactly 8 chars long" }),

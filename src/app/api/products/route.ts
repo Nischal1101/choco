@@ -15,13 +15,16 @@ export async function POST(request: Request) {
       image: data.get("image"),
       price: Number(data.get("price")),
     });
-  } catch (error) {
-    return Response.json({ message: error }, { status: 400 });
+  } catch (error: any) {
+    return Response.json({ message: error.message }, { status: 400 });
   }
-  const filename = ` ${Date.now()}.${validatedData.image.name.split(".")[1]}`;
+  const filename = ` ${Date.now()}.${
+    (validatedData.image as File).name.split(".")[1]
+  }`;
   let pathName;
   try {
-    const buffer = Buffer.from(await validatedData.image.arrayBuffer());
+    const arrayBuffer = await (validatedData.image as File).arrayBuffer();
+    const buffer = new Uint8Array(arrayBuffer);
     pathName = path.join(process.cwd(), "public/assets", filename);
     await writeFile(pathName, buffer);
   } catch (error) {

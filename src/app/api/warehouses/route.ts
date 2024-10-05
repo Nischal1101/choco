@@ -28,5 +28,5 @@ export async function GET() {
   } catch (error) {
     return Response.json({ message: error }, { status: 500 });
   }
-  return Response.json({ message: "OK" }, { status: 200 });
+  return Response.json(allWarehouse, { status: 200 });
 }
