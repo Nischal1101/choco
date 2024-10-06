@@ -10,8 +10,8 @@ import {
 import { api } from "./client";
 
 export const getAllProducts = async () => {
-  const response: Axios.AxiosXHR<Product[]> = await api.get("/products");
-  return response.data;
+  const response = await api.get("/products");
+  return await response.data;
 };
 export const createProduct = async (data: FormData) => {
   const response = await api.post("/products", data, {

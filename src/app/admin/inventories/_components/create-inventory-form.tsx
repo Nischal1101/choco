@@ -13,7 +13,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import { deliveryPersonSchema } from "@/lib/validators/deliveryPersonSchema";
 import {
   Select,
   SelectContent,
@@ -21,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Product } from "@/types";
+import { Product, Warehouse } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { getAllProducts, getAllWarehouses } from "@/http/api";
 import { inventorySchema } from "@/lib/validators/inventorySchema";
@@ -42,14 +41,16 @@ const CreateInventoryForm = ({
     },
   });
 
-  const { data: warehouses, isLoading: isWarehousesLoading } = useQuery({
+  const { data: warehouses, isLoading: isWarehousesLoading } = useQuery<
+    Warehouse[]
+  >({
     queryKey: ["warehouses"],
-    queryFn: () => getAllWarehouses(),
+    queryFn: getAllWarehouses as () => Promise<Warehouse[]>,
   });
 
   const { data: products, isLoading: isProductsLoading } = useQuery<Product[]>({
     queryKey: ["products"],
-    queryFn: getAllProducts,
+    queryFn: getAllProducts as () => Promise<Product[]>,
   });
 
   const handleSubmit = (values: FormValues) => {

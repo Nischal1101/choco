@@ -5,7 +5,7 @@ import React from "react";
 import { columns } from "./_components/column";
 import { useQuery } from "@tanstack/react-query";
 import { getAllWarehouses } from "@/http/api";
-import { Product } from "@/types";
+import { Product, Warehouse } from "@/types";
 import { Loader2 } from "lucide-react";
 import { useNewWarehouse } from "@/store/warehouse/warehouse-store";
 import { DataTable } from "../_components/data-table";
@@ -18,9 +18,9 @@ const WarehousesPage = () => {
     data: warehouses,
     isLoading,
     isError,
-  } = useQuery<Product[]>({
+  } = useQuery<Warehouse[]>({
     queryKey: ["warehouses"],
-    queryFn: getAllWarehouses as () => Promise<Product[]>,
+    queryFn: getAllWarehouses as () => Promise<Warehouse[]>,
   });
 
   return (

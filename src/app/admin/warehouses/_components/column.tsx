@@ -7,11 +7,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Product } from "@/types";
+import { Warehouse } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 
-export const columns: ColumnDef<Product>[] = [
+export const columns: ColumnDef<Warehouse>[] = [
   {
     accessorKey: "name",
     header: "Name",

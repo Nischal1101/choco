@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllDeliveryPersons } from "@/http/api";
-import { Product } from "@/types";
+import { DeliveryPerson, Product } from "@/types";
 import { Loader2 } from "lucide-react";
 import { useNewDeliveryPerson } from "@/store/deliveryPerson/delivery-person-store";
 import { DataTable } from "../_components/data-table";
-import DeliveryPersonSheet from "./_components/delivery-person-sheet.tsx";
+import { columns } from "./_components/column";
+import DeliveryPersonSheet from "./_components/delivery-person-sheet";
 
 const DeliveryPersonsPage = () => {
   const { onOpen } = useNewDeliveryPerson();
@@ -17,9 +18,9 @@ const DeliveryPersonsPage = () => {
     data: deliveryPersons,
     isLoading,
     isError,
-  } = useQuery<Product[]>({
+  } = useQuery<DeliveryPerson[]>({
     queryKey: ["delivery-persons"],
-    queryFn: () => getAllDeliveryPersons,
+    queryFn: getAllDeliveryPersons as () => Promise<DeliveryPerson[]>,
   });
 
   return (
